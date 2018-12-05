@@ -109,3 +109,61 @@ print(df1)
 print(df1._is_view)
 assert df1._is_view
 assert df1.equals(df)
+
+# %%
+def shellsort(arr):
+    n = len(arr)
+    gap = n//2
+    while gap > 0:
+        for i in range(gap,n):
+            temp = arr[i]
+            curr = i
+            while curr >= gap and arr[curr-gap]> temp:
+                # if value from lower index is greater than
+                # temp: move to that loc ( ascending)
+                arr[curr] = arr[curr-gap]
+                curr = curr - gap
+
+            # put the temp value at right location
+            arr[curr] = temp
+        gap = gap//2
+
+    return arr
+shellsort([3,5,1,10,8])
+
+# %%
+# Quicksort
+def mergesort(arr):
+    if len(arr) > 1:
+        mid = len(arr)//2
+        lefthalf = arr[:mid]
+        righthalf = arr[mid:]
+
+
+        mergesort(lefthalf)
+        mergesort(righthalf)
+        l = 0
+        r = 0
+        curr = 0
+
+        while l < len(lefthalf) and r < len(righthalf):
+            if lefthalf[l] < righthalf[r]:
+                arr[curr] = lefthalf[l]
+                l = l + 1
+            else:
+                arr[curr] = righthalf[r]
+                r = r + 1
+            curr = curr + 1
+
+        while l < len(lefthalf):
+            arr[curr] = lefthalf[l]
+            l += 1
+            curr += 1
+
+        while r < len(righthalf):
+            arr[curr] = righthalf[r]
+            curr += 1
+            r += 1
+
+        return arr
+mergesort([3,5,1,10,-8])
